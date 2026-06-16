@@ -44,11 +44,11 @@ resource "aws_instance" "hello_world" {
   user_data_replace_on_change = true
   user_data = <<-EOF
     #!/bin/bash
-    yum update -y
-    yum install -y nginx
+    apt-get update -y
+    apt-get install -y nginx
     systemctl start nginx
     systemctl enable nginx
-    echo "<h1>Hello World do Terraform!</h1><p>Instancia: $(hostname)</p><p>Owner: Venery</p>" > /usr/share/nginx/html/index.html
+    echo "<h1>Hello World do Terraform!</h1><p>Instancia: $(hostname)</p><p>Owner: Venery</p>" > /var/www/html/index.html
   EOF
   tags = {
     Name  = "terraform-hello-world"
