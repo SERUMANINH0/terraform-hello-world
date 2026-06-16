@@ -41,7 +41,7 @@ resource "aws_instance" "hello_world" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web_sg.id]
-
+  user_data_replace_on_change = true
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
@@ -50,7 +50,6 @@ resource "aws_instance" "hello_world" {
     systemctl enable nginx
     echo "<h1>Hello World do Terraform!</h1><p>Instancia: $(hostname)</p><p>Owner: Venery</p>" > /usr/share/nginx/html/index.html
   EOF
-
   tags = {
     Name  = "terraform-hello-world"
     Owner = "Venery"
